@@ -10,7 +10,7 @@ public class Results {
     @SerializedName("count")
     public Integer count;
     @SerializedName("entries")
-    public List<Entry> entries = null;
+    public List<Entry> entries;
 
     public class Entry {
 

@@ -10,6 +10,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MyActivity {
+    List<Results.Entry> finalList = new ArrayList<>();
 
     public int Add(int a, int b) {
         return a + b;
@@ -20,14 +21,13 @@ public class MyActivity {
     }
 
     public List<Results.Entry> getData() {
-        final List<Results.Entry>[] myheroList = new List[]{new ArrayList<>()};
         Call<Results> call = RetrofitMyClient.getInstance().getMyApi().getMyData();
         call.enqueue(new Callback<Results>() {
 
             @Override
             public void onResponse(Call<Results> call, Response<Results> response) {
-                myheroList[0] = response.body().entries;
-
+                assert response.body() != null;
+                finalList = response.body().entries;
             }
 
             @Override
@@ -37,7 +37,7 @@ public class MyActivity {
 
         });
 
-        return myheroList[0];
+        return finalList;
 
     }
 }
